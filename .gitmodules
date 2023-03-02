@@ -1,0 +1,3 @@
+[submodule "app-microservice-auth-node"]
+	path = app-microservice-auth-node
+	url = https://github.com/RenatoBrunetti/app-microservice-auth-node.git

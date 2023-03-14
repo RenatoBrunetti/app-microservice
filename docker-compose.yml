@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  auth-node:
+    container_name: app-microservice-auth-node
+    image: node:18.14.2
+    volumes:
+      - ./app-microservice-auth-node:/app
+      - type: bind
+        source: ./app-microservice-auth-node.sh
+        target: /app/entrypoint.sh
+    working_dir: /app
+    command: sh ./entrypoint.sh
+    environment:
+      SERVER_PORT: 3000
+      RABBITMQ_HOST: 'rabbitmq'
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
+    ports:
+      - 3000:3000
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - 5672:5672
